@@ -7,7 +7,18 @@
 #include "common.h"
 
 typedef enum {
-    OP_RETURN,          // Return from current function
+  OP_RETURN,          // Return from current function
 } OpCode;
+
+/// Wrapper around an array of bytes.
+typedef struct {
+  /// Number of allocated elements that are currently in use.
+  int count;
+
+  /// Number of elements in the array that we have allocated.
+  int capacity;
+
+  uint8_t* code;
+};
 
 #endif // SEALOX_CHUNK_H
