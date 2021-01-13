@@ -3,4 +3,4 @@ project(sealox C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(sealox main.c)
+add_executable(sealox main.c common.h)
