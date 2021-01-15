@@ -19,6 +19,9 @@ typedef struct {
   int capacity;
 
   uint8_t* code;
-};
+} Chunk;
+
+/// Initialize new chunk, starts completely empty.
+void initChunk(Chunk* chunk);
 
 #endif // SEALOX_CHUNK_H
