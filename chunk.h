@@ -24,4 +24,7 @@ typedef struct {
 /// Initialize new chunk, starts completely empty.
 void initChunk(Chunk* chunk);
 
+/// Append a byte to the end of the chunk.
+void writeChunk(Chunk* chunk, uint8_t byte);
+
 #endif // SEALOX_CHUNK_H
