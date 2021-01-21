@@ -14,7 +14,11 @@
   (type*)reallocate(pointer, sizeof(type) * (oldCount), \
   sizeof(type) * (newCount))
 
-/// TODO Allocating memory, freeing memory, changing size of an existing allocation.
+/// Wrapper for reallocate, passing in zero for new size.
+#define FREE_ARRAY(type, pointer, oldCount) \
+  reallocate(pointer, sizeof(type) * (oldCount), 0)
+
+/// Allocating memory, freeing memory, changing size of an existing allocation.
 void* reallocate(void* pointer, size_t oldSize, size_t newSize);
 
 #endif // SEALOX_MEMORY_H
