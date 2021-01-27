@@ -5,6 +5,7 @@
 /// Each instruction has a one-byte operation code.
 
 #include "common.h"
+#include "value.h"
 
 typedef enum {
   OP_RETURN,          // Return from current function
@@ -19,6 +20,7 @@ typedef struct {
   int capacity;
 
   uint8_t* code;
+  ValueArray constants;
 } Chunk;
 
 /// Initialize new chunk, starts completely empty.
@@ -29,5 +31,9 @@ void freeChunk(Chunk* chunk);
 
 /// Append a byte to the end of the chunk.
 void writeChunk(Chunk* chunk, uint8_t byte);
+
+/// Convenience method to add a new constant to the chunk.
+/// Returns the index where the constant was appended.
+int addConstant(Chunk* chunk, Value value);
 
 #endif // SEALOX_CHUNK_H

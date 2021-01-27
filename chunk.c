@@ -7,6 +7,9 @@ void initChunk(Chunk* chunk) {
   chunk->count = 0;
   chunk->capacity = 0;
   chunk->code = NULL;
+
+  // Must also initialize the constant list when we initialize the chunk.
+  initValueArray(&chunk->constants);
 }
 
 void writeChunk(Chunk* chunk, uint8_t byte) {
@@ -24,6 +27,14 @@ void writeChunk(Chunk* chunk, uint8_t byte) {
 void freeChunk(Chunk* chunk) {
   FREE_ARRAY(uint8_t, chunk->code, chunk->capacity);
 
+  // Free the constants when we free the chunk.
+  freeValueArray(&chunk->constants);
+
   // Zero out the fields used.
   initChunk(chunk);
+}
+
+int addConstant(Chunk* chunk, Value value) {
+  writeValueArray(&chunk->constants, value);
+  return chunk->constants.count - 1;
 }
