@@ -8,6 +8,7 @@
 #include "value.h"
 
 typedef enum {
+  OP_CONSTANT,
   OP_RETURN,          // Return from current function
 } OpCode;
 
