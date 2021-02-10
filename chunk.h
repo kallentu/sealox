@@ -21,6 +21,11 @@ typedef struct {
   int capacity;
 
   uint8_t* code;
+
+  /// Array to hold line information, used to determine what line an error
+  /// is occurring on.
+  int* lines;
+
   ValueArray constants;
 } Chunk;
 
@@ -31,7 +36,8 @@ void initChunk(Chunk* chunk);
 void freeChunk(Chunk* chunk);
 
 /// Append a byte to the end of the chunk.
-void writeChunk(Chunk* chunk, uint8_t byte);
+/// When written, need to know what source line it came from to trace back.
+void writeChunk(Chunk* chunk, uint8_t byte, int line);
 
 /// Convenience method to add a new constant to the chunk.
 /// Returns the index where the constant was appended.
