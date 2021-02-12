@@ -35,6 +35,14 @@ int disassembleInstruction(Chunk* chunk, int offset) {
   // the instruction is.
   printf("%04d ", offset);
 
+  if (offset > 0 &&
+      chunk->lines[offset] == chunk->lines[offset - 1]) {
+    // For any instruction that comes from the same source as the preceding one.
+    printf("   | ");
+  } else {
+    printf("%4d ", chunk->lines[offset]);
+  }
+
   // For each instruction, dispatch to utility function for displaying it.
   uint8_t instruction = chunk->code[offset];
   switch (instruction) {
