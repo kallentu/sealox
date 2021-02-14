@@ -26,6 +26,13 @@ typedef struct {
   /// is occurring on.
   int* lines;
 
+  /// Instruction index that the line starts at. Will have same size as [lines].
+  int* instructionIndices;
+
+  /// Current line index. Starts at 0, will keep track of the current line
+  /// the chunk is on.
+  int currentLineIndex;
+
   ValueArray constants;
 } Chunk;
 
@@ -42,5 +49,9 @@ void writeChunk(Chunk* chunk, uint8_t byte, int line);
 /// Convenience method to add a new constant to the chunk.
 /// Returns the index where the constant was appended.
 int addConstant(Chunk* chunk, Value value);
+
+/// Given the index of an instruction, determines the line where the instruction
+/// occurs.
+int getLine(Chunk* chunk, int instructionIndex);
 
 #endif // SEALOX_CHUNK_H
